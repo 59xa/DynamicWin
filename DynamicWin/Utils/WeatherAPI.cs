@@ -138,7 +138,7 @@ namespace DynamicWin.Utils
 
                 Debug.WriteLine("WeatherAPI: IDX = {0}, TYPE = {1}", idx, type);
 
-                await Task.Delay(10000, token); // Wait for 10 seconds before re-fetching data
+                await Task.Delay(120000, token); // Wait for 2 minutes before re-fetching data
             }
 
             if (token.IsCancellationRequested || RegisterWeatherWidgetSettings.saveData.isSettingsMenuOpen)
