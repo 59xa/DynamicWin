@@ -88,6 +88,7 @@ namespace DynamicWin
             new HardwareMonitor();
 
             Settings.InitializeSettings();
+            Migrations.MakeSmallWidgetMigrations();
             UpdateStartup();
 
             MainForm mainForm = new MainForm();
