@@ -121,8 +121,8 @@ namespace DynamicWin.UI.Menu.Menus
             CancellationToken _ctk = _cts.Token;
 
             // Check if weather widget exists in home menu
-            List<string> _w = Settings.bigWidgets;
-            if (_w.Exists(x => x.Contains("RegisterWeatherWidget")) && RegisterWeatherWidgetSettings.saveData.isSettingsMenuOpen == true)
+            List<string> _bW = Settings.bigWidgets;
+            if (_bW.Exists(x => x.Contains("RegisterWeatherWidget")) && RegisterWeatherWidgetSettings.saveData.isSettingsMenuOpen == true)
             {
                 RegisterWeatherWidgetSettings.saveData.isSettingsMenuOpen = false;
             }
@@ -213,7 +213,7 @@ namespace DynamicWin.UI.Menu.Menus
             {
                 if (smallWidgets.ContainsKey(widget.GetType().FullName)) continue;
                 smallWidgets.Add(widget.GetType().FullName, widget);
-                System.Diagnostics.Debug.WriteLine(widget.GetType().FullName);
+                System.Diagnostics.Debug.WriteLine("SMALL WIDGETS: " + widget.GetType().FullName);
             }
 
             foreach (var widget in Res.availableBigWidgets)
