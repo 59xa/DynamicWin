@@ -9,6 +9,7 @@ using DynamicWin.Utils;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Forms;
+using static DynamicWin.UI.UIElements.IslandObject;
 
 namespace DynamicWin.UI.Menu.Menus
 {
@@ -476,6 +477,14 @@ namespace DynamicWin.UI.Menu.Menus
             {
                 widgets[i].LocalPosition.X -= offset;
             }
+        }
+
+        // Border should only be rendered if on island mode instead of notch
+        public override Col IslandBorderColor()
+        {
+            IslandMode mode = Settings.IslandMode; // Reads either Island or Notch as value
+            if (mode == IslandMode.Island && RendererMain.Instance.MainIsland.IsHovering) return new Col(0.5f, 0.5f, 0.5f);
+            else return new Col(0, 0, 0, 0); // Render transparent if island mode is Notch
         }
     }
 }
