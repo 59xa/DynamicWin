@@ -213,7 +213,7 @@ namespace DynamicWin.UI.Menu.Menus
             {
                 if (smallWidgets.ContainsKey(widget.GetType().FullName)) continue;
                 smallWidgets.Add(widget.GetType().FullName, widget);
-                System.Diagnostics.Debug.WriteLine("SMALL WIDGETS: " + widget.GetType().FullName);
+                System.Diagnostics.Debug.WriteLine(widget.GetType().FullName);
             }
 
             foreach (var widget in Res.availableBigWidgets)
