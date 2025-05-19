@@ -25,8 +25,8 @@ namespace DynamicWin.UI.Widgets.Big
     public class MediaWidget : WidgetBase
     {
         MediaController controller;
-        AudioVisualizer audioVisualizer;
-        AudioVisualizer audioVisualizerBig;
+        AudioVisualiser audioVisualiser;
+        AudioVisualiser audioVisualiserBig;
 
         DWImageButton playPause;
         DWImageButton next;
@@ -88,18 +88,12 @@ namespace DynamicWin.UI.Widgets.Big
             };
             AddLocalObject(prev);
 
-            audioVisualizer = new AudioVisualizer(this, new Vec2(0, 30), new Vec2(125, 25), length: 16)
-            {
-                divisor = 1.35f
-            };
-            AddLocalObject(audioVisualizer);
+            audioVisualiser = new AudioVisualiser(this, new Vec2(0, 30), new Vec2(125, 25));
+            AddLocalObject(audioVisualiser);
 
-            audioVisualizerBig = new AudioVisualizer(this, new Vec2(0, 0), GetWidgetSize(), length: 16, alignment: UIAlignment.Center,
-                Primary: spotifyCol.Override(a: 0.35f), Secondary: spotifyCol.Override(a: 0.025f) * 0.1f)
-            {
-                divisor = 2f
-            };
-            audioVisualizerBig.SilentSetActive(false);
+            audioVisualiserBig = new AudioVisualiser(this, new Vec2(0, 0), GetWidgetSize(), alignment: UIAlignment.Center,
+                Primary: spotifyCol.Override(a: 0.35f), Secondary: spotifyCol.Override(a: 0.025f) * 0.1f);
+            audioVisualiserBig.SilentSetActive(false);
 
             noMediaPlaying = new DWText(this, "No Media Playing", new Vec2(0, 30))
             {
@@ -168,14 +162,14 @@ namespace DynamicWin.UI.Widgets.Big
             }
             cycle++;
 
-            prev.normalColor = Theme.IconColor * audioVisualizer.GetActionCol().Override(a: 0.2f);
-            next.normalColor = Theme.IconColor * audioVisualizer.GetActionCol().Override(a: 0.2f);
-            playPause.normalColor = Theme.IconColor * audioVisualizer.GetActionCol().Override(a: 0.2f);
+            prev.normalColor = Theme.IconColor * audioVisualiser.GetActionCol().Override(a: 0.2f);
+            next.normalColor = Theme.IconColor * audioVisualiser.GetActionCol().Override(a: 0.2f);
+            playPause.normalColor = Theme.IconColor * audioVisualiser.GetActionCol().Override(a: 0.2f);
 
-            if(!isSpotifyAvaliable)
-                smoothedAmp = (float)Math.Max(Mathf.Lerp(smoothedAmp, audioVisualizer.AverageAmplitude, smoothing * deltaTime), audioVisualizer.AverageAmplitude);
+            if (!isSpotifyAvaliable)
+                smoothedAmp = (float)Math.Max(Mathf.Lerp(smoothedAmp, audioVisualiser.AverageAmplitude, smoothing * deltaTime), audioVisualiser.AverageAmplitude);
             else
-                smoothedAmp = (float)Math.Max(Mathf.Lerp(smoothedAmp, audioVisualizer.AverageAmplitude, smoothing * deltaTime), audioVisualizer.AverageAmplitude);
+                smoothedAmp = (float)Math.Max(Mathf.Lerp(smoothedAmp, audioVisualiser.AverageAmplitude, smoothing * deltaTime), audioVisualiser.AverageAmplitude);
 
             if (smoothedAmp < 0.005f) smoothedAmp = 0f;
 
@@ -184,10 +178,10 @@ namespace DynamicWin.UI.Widgets.Big
             noMediaPlaying.SetActive(smoothedAmp.Equals(0f) && !isSpotifyAvaliable);
             title.SetActive(isSpotifyAvaliable);
             artist.SetActive(isSpotifyAvaliable);
-            audioVisualizerBig.SetActive(isSpotifyAvaliable);
-            audioVisualizer.SetActive(!isSpotifyAvaliable);
+            audioVisualiserBig.SetActive(isSpotifyAvaliable);
+            audioVisualiser.SetActive(!isSpotifyAvaliable);
 
-            audioVisualizerBig.UpdateCall(deltaTime);
+            audioVisualiserBig.UpdateCall(deltaTime);
         }
 
         private void InitMediaPlayer()
@@ -209,9 +203,12 @@ namespace DynamicWin.UI.Widgets.Big
 
             canvas.ClipRoundRect(GetRect());
 
-            audioVisualizerBig.Alpha = 0.75f;
-            audioVisualizerBig.blurAmount = 15f;
-            audioVisualizerBig.DrawCall(canvas);
+            audioVisualiserBig.Alpha = 0.75f;
+            audioVisualiserBig.BlurAmount = 10f;
+            audioVisualiserBig.EnableColourTransition = true;
+            audioVisualiserBig.EnableDotWhenLow = false;
+            audioVisualiserBig.BarSpacing = 1f;
+            audioVisualiserBig.DrawCall(canvas);
 
             canvas.RestoreToCount(saveCanvas);
 

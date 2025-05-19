@@ -15,8 +15,8 @@ using Newtonsoft.Json.Linq;
 *    
 *   Author:                 Megan Park
 *   GitHub:                 https://github.com/59xa
-*   Implementation Date:    16 May 2024
-*   Last Modified:          17 May 2024 08:38 KST (UTC+9)
+*   Implementation Date:    16 May 2025
+*   Last Modified:          17 May 2025 09:26 KST (UTC+9)
 */
 
 namespace DynamicWin.UI.Widgets.Big
@@ -273,13 +273,13 @@ namespace DynamicWin.UI.Widgets.Big
                 // If country index is set to 0, display location based on user's IP address
                 if (_countries[RegisterWeatherWidgetSettings.saveData.countryIndex] == "Default")
                 {
-                    Debug.WriteLine("WeatherWidget: FETCHED GEO-LOCATION FORECAST");
+                    Debug.WriteLine("[WEATHER WIDGET] Default selected, fetching geo-location forecast.");
                     _ = _WeatherAPI.Fetch(RegisterWeatherWidgetSettings.saveData.countryIndex, "default");
                 }
 
                 else
                 {
-                    Debug.WriteLine("WeatherWidget: FETCHED USER-DEFINED FORECAST");
+                    Debug.WriteLine("[WEATHER WIDGET] Selection is user-defined, fetching user-defined forecast.");
                     _ = _WeatherAPI.Fetch(RegisterWeatherWidgetSettings.saveData.cityIndex, "city"); // Trigger if user configures weather values apart from Default
                 }
                 

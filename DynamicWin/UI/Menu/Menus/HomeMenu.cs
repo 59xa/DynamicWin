@@ -9,6 +9,7 @@ using DynamicWin.Utils;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Forms;
+using static DynamicWin.UI.UIElements.IslandObject;
 
 namespace DynamicWin.UI.Menu.Menus
 {
@@ -121,8 +122,8 @@ namespace DynamicWin.UI.Menu.Menus
             CancellationToken _ctk = _cts.Token;
 
             // Check if weather widget exists in home menu
-            List<string> _w = Settings.bigWidgets;
-            if (_w.Exists(x => x.Contains("RegisterWeatherWidget")) && RegisterWeatherWidgetSettings.saveData.isSettingsMenuOpen == true)
+            List<string> _bW = Settings.bigWidgets;
+            if (_bW.Exists(x => x.Contains("RegisterWeatherWidget")) && RegisterWeatherWidgetSettings.saveData.isSettingsMenuOpen == true)
             {
                 RegisterWeatherWidgetSettings.saveData.isSettingsMenuOpen = false;
             }
@@ -183,7 +184,7 @@ namespace DynamicWin.UI.Menu.Menus
             {
                 MenuManager.OpenMenu(new SettingsMenu());
 
-                System.Diagnostics.Debug.WriteLine("HOME MENU: SETTINGS MENU OPEN");
+                System.Diagnostics.Debug.WriteLine("[HOME MENU] User opened Settings menu.");
                 RegisterWeatherWidgetSettings.saveData.isSettingsMenuOpen = true;
 
                 var _w = new WeatherAPI();
@@ -476,6 +477,14 @@ namespace DynamicWin.UI.Menu.Menus
             {
                 widgets[i].LocalPosition.X -= offset;
             }
+        }
+
+        // Border should only be rendered if on island mode instead of notch
+        public override Col IslandBorderColor()
+        {
+            IslandMode mode = Settings.IslandMode; // Reads either Island or Notch as value
+            if (mode == IslandMode.Island && RendererMain.Instance.MainIsland.IsHovering) return new Col(0.5f, 0.5f, 0.5f);
+            else return new Col(0, 0, 0, 0); // Render transparent if island mode is Notch
         }
     }
 }
