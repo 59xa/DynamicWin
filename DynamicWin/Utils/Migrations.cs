@@ -74,26 +74,6 @@ namespace DynamicWin.Utils
             }
         }
 
-        public static void MakeBigWidgetMigrations()
-        {
-            bool changed = false;
-
-            foreach (var migration in BigWidgetMigrations)
-            {
-                changed |= ReplaceInList(Settings.bigWidgets, migration, "BigWidgets");
-            }
-
-            if (changed)
-            {
-                Debug.WriteLine("[MIGRATION] Big widget changes detected. Saving...");
-                Settings.Save();
-            }
-            else
-            {
-                Debug.WriteLine("[MIGRATION] No big widget changes.");
-            }
-        }
-
         private static bool ReplaceInList(List<string> list, WidgetMigration migration, string listName)
         {
             bool replaced = false;
@@ -106,11 +86,20 @@ namespace DynamicWin.Utils
             {
                 if (list[i].Contains(migration.OldName))
                 {
-                    Debug.WriteLine($"[MIGRATION] ({listName}) Replacing:");
-                    Debug.WriteLine($"  {list[i]}");
-                    list[i] = list[i].Replace(migration.OldName, migration.NewName);
-                    Debug.WriteLine($"  → {list[i]}");
-                    replaced = true;
+                    if (list.Contains(migration.NewName))
+                    {
+                        Debug.WriteLine($"[MIGRATION] ({listName}) '{migration.NewName}' already exists. Removing duplicate '{list[i]}'");
+                        list.RemoveAt(i);
+                        i--;
+                    }
+                    else
+                    {
+                        Debug.WriteLine($"[MIGRATION] ({listName}) Replacing:");
+                        Debug.WriteLine($"  {list[i]}");
+                        list[i] = list[i].Replace(migration.OldName, migration.NewName);
+                        Debug.WriteLine($"  → {list[i]}");
+                        replaced = true;
+                    }
                 }
             }
 
