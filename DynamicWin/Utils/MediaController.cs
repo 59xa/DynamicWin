@@ -57,6 +57,7 @@ namespace DynamicWin.Utils
     *   Last Modified:          19 May 2025 16:12 KST (UTC+9)
     */
 
+    // TO-DO: Not adding comments for now, as this implementation will be required for v1.4.0b
     public class MediaInfo
     {
         private static MediaInfo? _i;
