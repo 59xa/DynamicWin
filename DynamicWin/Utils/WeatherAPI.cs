@@ -15,8 +15,8 @@ using Newtonsoft.Json;
 *    
 *   Author:                 Megan Park
 *   GitHub:                 https://github.com/59xa
-*   Implementation Date:    16 May 2024
-*   Last Modified:          18 May 2024 09:23 KST (UTC+9)
+*   Implementation Date:    16 May 2025
+*   Last Modified:          18 May 2025 09:23 KST (UTC+9)
 *   
 *   TO MAINTAINERS:
 *    - When fetching weather data, the API might hallucinate, and retrieve forecast data from a different city.

@@ -13,8 +13,8 @@ using DynamicWin.Main;
 *    
 *   Author:                 Megan Park
 *   GitHub:                 https://github.com/59xa
-*   Implementation Date:    18 May 2024
-*   Last Modified:          18 May 2024 08:56 KST (UTC+9)
+*   Implementation Date:    18 May 2025
+*   Last Modified:          18 May 2025 08:56 KST (UTC+9)
 *   
 */
 

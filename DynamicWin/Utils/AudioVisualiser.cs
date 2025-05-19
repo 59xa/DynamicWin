@@ -10,8 +10,8 @@ using System.Numerics;
 *    
 *   Author:                 Megan Park
 *   GitHub:                 https://github.com/59xa
-*   Implementation Date:    18 May 2024
-*   Last Modified:          18 May 2024 08:53 KST (UTC+9)
+*   Implementation Date:    18 May 2025
+*   Last Modified:          18 May 2025 08:53 KST (UTC+9)
 *   
 */
 
