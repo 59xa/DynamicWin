@@ -14,7 +14,7 @@ using DynamicWin.Main;
 *   Author:                 Megan Park
 *   GitHub:                 https://github.com/59xa
 *   Implementation Date:    18 May 2025
-*   Last Modified:          18 May 2025 08:56 KST (UTC+9)
+*   Last Modified:          18 May 2025 18:19 KST (UTC+9)
 *   
 */
 
@@ -52,6 +52,9 @@ namespace DynamicWin.Utils
              */
         };
 
+        /// <summary>
+        /// Void function that allows migration of existing small widgets without removing them from where they are currently placed in the interface.
+        /// </summary>
         public static void MakeSmallWidgetMigrations()
         {
             bool changed = false;
@@ -74,6 +77,13 @@ namespace DynamicWin.Utils
             }
         }
 
+        /// <summary>
+        /// Helper to handle migrations depending on specified values given
+        /// </summary>
+        /// <param name="list">The list containing the widget</param>
+        /// <param name="migration">Values that hold both legacy and new naming conventions</param>
+        /// <param name="listName">The name of the list in string format</param>
+        /// <returns></returns>
         private static bool ReplaceInList(List<string> list, WidgetMigration migration, string listName)
         {
             bool replaced = false;
@@ -82,17 +92,19 @@ namespace DynamicWin.Utils
             foreach (var item in list)
                 Debug.WriteLine($"  {item}");
 
+            // Iterates over the list to look for the legacy widget
             for (int i = 0; i < list.Count; i++)
             {
                 if (list[i].Contains(migration.OldName))
                 {
+                    // Ensure widget does not duplicate if user downgrades the application
                     if (list.Contains(migration.NewName))
                     {
                         Debug.WriteLine($"[MIGRATION] ({listName}) '{migration.NewName}' already exists. Removing duplicate '{list[i]}'");
                         list.RemoveAt(i);
                         i--;
                     }
-                    else
+                    else // Replace the legacy widget with the new widget
                     {
                         Debug.WriteLine($"[MIGRATION] ({listName}) Replacing:");
                         Debug.WriteLine($"  {list[i]}");
@@ -103,6 +115,7 @@ namespace DynamicWin.Utils
                 }
             }
 
+            // Display in debug that no changes were made
             if (!replaced)
             {
                 Debug.WriteLine($"[MIGRATION] ({listName}) No match for: {migration.OldName}");
@@ -113,6 +126,7 @@ namespace DynamicWin.Utils
         }
     }
 
+    // Class method to store both legacy and new naming conventions
     public class WidgetMigration
     {
         public string OldName { get; set; }
