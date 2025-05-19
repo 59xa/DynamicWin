@@ -184,7 +184,7 @@ namespace DynamicWin.UI.Menu.Menus
             {
                 MenuManager.OpenMenu(new SettingsMenu());
 
-                System.Diagnostics.Debug.WriteLine("HOME MENU: SETTINGS MENU OPEN");
+                System.Diagnostics.Debug.WriteLine("[HOME MENU] User opened Settings menu.");
                 RegisterWeatherWidgetSettings.saveData.isSettingsMenuOpen = true;
 
                 var _w = new WeatherAPI();
