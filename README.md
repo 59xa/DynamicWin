@@ -21,7 +21,7 @@ Similar to dynamic notches that you can find on macOS like [NotchNook](https://l
 
 ### Implementation and build
 This application is developed using C# for the logic, and [SkiaSharp](https://github.com/mono/SkiaSharp) to display the graphical interface.
-To build this project, ensure that you have the latest version of **.NET 8.0** installed on your environment.
+To build this project, ensure that you have the latest version of **`.NET 9.0`** installed on your environment.
 
 To get started:
 ```bash
