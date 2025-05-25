@@ -2,3 +2,5 @@
 /DynamicWin/bin/
 /DynamicWin/obj/
 /DynamicWinSetup
+/DynamicWin/Properties
+/DynamicWin/DynamicWin.csproj.user
